@@ -17,7 +17,7 @@ class Class(Base):
 	__tablename__ = 'class'
 	id = Column(Integer,primary_key=True)
 	name = Column(String(50))
-	status = Column(Boolean, default=False)
+	class_in_session = Column(Boolean, default=False)
 	class_start_time = Column(DateTime)
 	class_end_time = Column(DateTime)
 
