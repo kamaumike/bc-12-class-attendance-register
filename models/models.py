@@ -20,3 +20,18 @@ class Class(Base):
 	status = Column(Boolean, default=False)
 	class_start_time = Column(DateTime)
 	class_end_time = Column(DateTime)
+
+class TrackStudent(Base):
+	"""Creates a TrackStudent table for 
+	tracking students' in a class.
+	"""
+
+	__tablename__ = 'TrackStudent'
+	id = Column(Integer,primary_key=True)
+	check_in_time = Column(DateTime, default=func.now())
+	check_out_time = Column(DateTime)
+	reason = Column(String)
+	student_id = Column(Integer,nullabe=False, ForeignKey('student.id'))
+	class_id = Column(Integer,nullabe=False, ForeignKey('class.id'))	
+	students = relationship(Student)
+    classes = relationship(Class)
