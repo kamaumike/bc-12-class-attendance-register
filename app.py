@@ -25,6 +25,12 @@ class AttendanceRegister(cmd.Cmd):
 		db = Database()
 		db.class_add(name)
 
+	def do_class_remove(self,class_id):
+		"""class_remove [class_id]
+		Accepts a class id
+		"""
+		db = Database()
+		db.class_remove(class_id)
 
 if __name__ == '__main__':
 	AttendanceRegister().cmdloop()
