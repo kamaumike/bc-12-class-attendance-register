@@ -65,6 +65,6 @@ class Database(object):
 			click.secho(("Deleted class with id '{}' succesfully.").format(class_id), fg='green')
 		else:
 			click.secho("Warning! class[id] cannot be empty.", fg='red')
-		
+
 if __name__ == '__main__':
 	Database().cmdloop()
