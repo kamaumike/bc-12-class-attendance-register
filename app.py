@@ -18,6 +18,14 @@ class AttendanceRegister(cmd.Cmd):
 		db = Database()
 		db.student_remove(student_id)
 
+	def do_class_add(self,name):
+		"""class_add [name]
+		Add the name of a class
+		"""
+		db = Database()
+		db.class_add(name)
+
+
 if __name__ == '__main__':
 	AttendanceRegister().cmdloop()
 

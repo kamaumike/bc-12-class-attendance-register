@@ -40,7 +40,19 @@ class Database(object):
 			self.session.commit()
 			click.secho(("Deleted student " + "'%s'" + " succesfully.") % (student_id), fg='green')
 		else:
-			click.secho("Warning! students'[id] cannot be empty.", fg='red')
+			click.secho("Warning! student[id] cannot be empty.", fg='red')
+
+	def class_add(self,name):
+		"""Adds a class
+		"""
+
+		if name:
+			new_class = Class(name=name)
+			self.session.add(new_class)
+			self.session.commit()
+			click.secho(("Added class '{}' succesfully.").format(name), fg='green')
+		else:
+			click.secho("Warning! class [name] cannot be empty.", fg='red')
 		
 if __name__ == '__main__':
 	Database().cmdloop()
