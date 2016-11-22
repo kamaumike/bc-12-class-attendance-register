@@ -30,5 +30,17 @@ class Database(object):
 		else:
 			click.secho("Warning! students'[name] cannot be empty.", fg='red')
 
+	def student_remove(self,student_id):
+		"""Deletes a student
+		"""
+		query1=self.session.query(Student).filter(Student.id==student_id).one()
+		
+		if student_id:
+			self.session.delete(query1)
+			self.session.commit()
+			click.secho(("Deleted student " + "'%s'" + " succesfully.") % (student_id), fg='green')
+		else:
+			click.secho("Warning! students'[id] cannot be empty.", fg='red')
+		
 if __name__ == '__main__':
 	Database().cmdloop()
