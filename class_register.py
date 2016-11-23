@@ -75,6 +75,7 @@ class Database(object):
 			query1=self.session.query(Class).filter(Class.id==class_id)
 			query2=query1.one()
 			query2.class_start_time=now
+			query2.class_in_session=True
 			self.session.commit()
 			click.secho("Added new time log for class {}".format(class_id), fg='green')
 		else:
