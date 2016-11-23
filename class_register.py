@@ -2,9 +2,10 @@ from termcolor import cprint
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import click
-
-
+import calendar
+from datetime import datetime
 from models.models import Base,Student,Class,TrackStudent
+
 
 engine =  create_engine('sqlite:///classregister.db')
 
@@ -63,6 +64,19 @@ class Database(object):
 			self.session.delete(query1)
 			self.session.commit()
 			click.secho(("Deleted class with id '{}' succesfully.").format(class_id), fg='green')
+		else:
+			click.secho("Warning! class[id] cannot be empty.", fg='red')
+
+	def log_start(self,class_id):
+		"""Creates a new time log for a particular class.
+		"""
+		if class_id:			
+			now = datetime.now()
+			query1=self.session.query(Class).filter(Class.id==class_id)
+			query2=query1.one()
+			query2.class_start_time=now
+			self.session.commit()
+			click.secho("Added new time log for class {}".format(class_id), fg='green')
 		else:
 			click.secho("Warning! class[id] cannot be empty.", fg='red')
 

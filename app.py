@@ -1,4 +1,5 @@
 import cmd
+import click
 from class_register import Database
 
 class AttendanceRegister(cmd.Cmd):
@@ -32,10 +33,19 @@ class AttendanceRegister(cmd.Cmd):
 		db = Database()
 		db.class_remove(class_id)
 
+
+	def do_log_start(self,class_id):
+		"""log_start [class_id]
+		Accepts a class id
+		"""	
+		db = Database()
+		db.log_start(class_id)
+
 	def do_exit(self,exit):
 		"""exit
 		Exits the application
 		"""
+		click.clear()
 		return True
 		
 if __name__ == '__main__':
