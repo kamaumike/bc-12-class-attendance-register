@@ -55,8 +55,7 @@ class AttendanceRegister(cmd.Cmd):
 		data=args.split()
 		db = Database()
 		db.check_in(data[0],data[1])
-		print(db.check_in(data[0],data[1]))		
-
+		
 	def do_exit(self,exit):
 		"""exit
 		Exits the application

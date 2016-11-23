@@ -99,5 +99,33 @@ class Database(object):
 			else:
 				click.secho("Warning! class[id] cannot be empty.", fg='red')
 
+	def check_in(self,student_id,class_id):
+		"""Checks in a student into a class at the current time.
+		"""
+		# Check current time
+		now = datetime.now()
+		# return class id in Class table
+		get_class_id=self.session.query(Class).filter(Class.id==class_id).one()
+		
+		# return student id in Student table
+		get_student_id=self.session.query(Student).filter(Student.id==student_id).one()
+			
+		# Check if parameters have been supplied
+		if student_id and class_id:
+			# Check if a class has started and student has not attended any other class
+			if get_class_id.class_in_session==True and get_student_id.is_student_in_class==False:				
+				check_in_student = TrackStudent(student_id=student_id,class_id=class_id,check_in_time=now)
+				get_student_id.is_student_in_class=True
+				self.session.add(check_in_student)
+				self.session.commit()
+				click.secho("Checked in student '{}' into class '{}'".format(student_id,class_id), fg='green')
+			elif get_class_id.class_in_session==False:
+				# Reset is_student_in_class to False if the Class has ended
+				get_student_id.is_student_in_class=False
+				self.session.commit()
+				click.secho("Warning! Class {} has not started.".format(class_id), fg='red')
+			else:
+				click.secho("Warning! You can only check into a single class.".format(class_id), fg='red')
+			
 if __name__ == '__main__':
 	Database().cmdloop()
