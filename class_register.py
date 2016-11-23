@@ -77,9 +77,27 @@ class Database(object):
 			query2.class_start_time=now
 			query2.class_in_session=True
 			self.session.commit()
-			click.secho("Added new time log for class {}".format(class_id), fg='green')
+			click.secho("Class {} has started".format(class_id), fg='green')
 		else:
 			click.secho("Warning! class[id] cannot be empty.", fg='red')
+
+	def log_end(self,class_id):
+		"""Ends a time log for a class that
+		has already been started.
+		"""
+		if class_id:			
+			now = datetime.now()
+			query1=self.session.query(Class).filter(Class.id==class_id)
+			query2=query1.one()
+			if query2.class_in_session==1:
+				query2.class_in_session=False
+				query2.class_end_time=now
+				self.session.commit()
+				click.secho("Class {} has ended".format(class_id), fg='green')
+			elif query2.class_in_session==0:
+				click.secho("Warning! Class {} has not started.".format(class_id), fg='red')
+			else:
+				click.secho("Warning! class[id] cannot be empty.", fg='red')			
 
 if __name__ == '__main__':
 	Database().cmdloop()

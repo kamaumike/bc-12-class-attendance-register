@@ -41,6 +41,13 @@ class AttendanceRegister(cmd.Cmd):
 		db = Database()
 		db.log_start(class_id)
 
+	def do_log_end(self,class_id):
+		"""log_end [class_id]
+		Accepts a class id
+		"""	
+		db = Database()
+		db.log_end(class_id)		
+
 	def do_exit(self,exit):
 		"""exit
 		Exits the application
