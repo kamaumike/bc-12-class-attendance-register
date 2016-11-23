@@ -10,7 +10,8 @@ class Student(Base):
 	__tablename__ = 'student'
 	id = Column(Integer,primary_key=True)
 	name = Column(String(50))
-    
+	is_student_in_class = Column(Boolean, default=False)    
+
 class Class(Base):
 	"""Creates class table"""
 

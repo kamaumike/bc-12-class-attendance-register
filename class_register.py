@@ -97,7 +97,7 @@ class Database(object):
 			elif query2.class_in_session==0:
 				click.secho("Warning! Class {} has not started.".format(class_id), fg='red')
 			else:
-				click.secho("Warning! class[id] cannot be empty.", fg='red')			
+				click.secho("Warning! class[id] cannot be empty.", fg='red')
 
 if __name__ == '__main__':
 	Database().cmdloop()

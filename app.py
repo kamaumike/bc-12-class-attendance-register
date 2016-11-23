@@ -46,7 +46,16 @@ class AttendanceRegister(cmd.Cmd):
 		Accepts a class id
 		"""	
 		db = Database()
-		db.log_end(class_id)		
+		db.log_end(class_id)
+
+	def do_check_in(self,args):
+		"""check_in [student_id][class_id]
+		Accepts a student id and class id
+		"""
+		data=args.split()
+		db = Database()
+		db.check_in(data[0],data[1])
+		print(db.check_in(data[0],data[1]))		
 
 	def do_exit(self,exit):
 		"""exit
