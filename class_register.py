@@ -2,6 +2,7 @@ from sqlalchemy import create_engine,desc
 from sqlalchemy.orm import sessionmaker
 import click
 from datetime import datetime
+from termcolor import cprint
 from prettytable import PrettyTable
 from models.models import Base,Student,Class,TrackStudent
 from sqlalchemy.orm.exc import NoResultFound
@@ -198,7 +199,7 @@ class Database(object):
 		for i in get_students:
 			x.add_row([i.id,i.name,i.is_student_in_class])
 		x.align='l'			
-		print(x)
+		cprint(x,'green',attrs=['bold'])
 
 	def class_list(self):
 		"""Lists all classes and the number of
@@ -219,7 +220,8 @@ class Database(object):
 		# Loop through the rows
 		for i in get_class_id:
 			x.add_row([i.id,i.name,i.class_in_session,i.class_start_time,i.class_end_time])			
-		print(x)
+		x.align='l'			
+		cprint(x,'green',attrs=['bold'])
 
 if __name__ == '__main__':
 	Database().cmdloop()
