@@ -55,6 +55,14 @@ class AttendanceRegister(cmd.Cmd):
 		data=args.split()
 		db = Database()
 		db.check_in(data[0],data[1])
+
+	def do_check_out(self,args):
+		"""check_in [student_id][class_id][reason]
+		Accepts a student id ,class id and reason
+		"""
+		data=args.split()
+		db = Database()
+		db.check_out(data[0],data[1],data[2])
 		
 	def do_exit(self,exit):
 		"""exit
@@ -65,5 +73,3 @@ class AttendanceRegister(cmd.Cmd):
 		
 if __name__ == '__main__':
 	AttendanceRegister().cmdloop()
-
-

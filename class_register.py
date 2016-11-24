@@ -126,6 +126,36 @@ class Database(object):
 				click.secho("Warning! Class {} has not started.".format(class_id), fg='red')
 			else:
 				click.secho("Warning! You can only check into a single class.".format(class_id), fg='red')
+
+	def check_out(self,student_id,class_id,reason):
+		"""Checks out a student from a class at the current time.
+		"""
+		# Check current time
+		now = datetime.now()
+		# return class id in Class table
+		get_class_id=self.session.query(Class).filter(Class.id==class_id).one()
+		
+		# return student id in Student table
+		get_student_id=self.session.query(Student).filter(Student.id==student_id).one()
+
+		# return the tracked student id in TrackStudent table
+		get_tracked_student_id=self.session.query(TrackStudent).filter(TrackStudent.student_id==student_id).one()
+			
+		# Check if parameters have been supplied
+		if student_id and class_id and reason:
+			# Check if a class has started and student is in a class
+			if get_class_id.class_in_session==True and get_student_id.is_student_in_class==True:				
+				#check_in_student = TrackStudent(student_id=student_id,class_id=class_id,check_in_time=now)
+				get_tracked_student_id.check_out_time=now
+				get_tracked_student_id.reason=reason
+				get_student_id.is_student_in_class=False
+				self.session.commit()
+				click.secho("Checked out student '{}' from class '{}'".format(student_id,class_id), fg='green')
+			# Check if student is in any class
+			elif get_student_id.is_student_in_class==False:
+				click.secho("Warning! Student {} is not in any class.".format(student_id), fg='red')
+			else:
+				click.secho("Warning! [student_id] [class_id] [reason] cannot be empty.", fg='red')
 			
 if __name__ == '__main__':
 	Database().cmdloop()
