@@ -176,5 +176,26 @@ class Database(object):
 			x.add_row([i.id,i.name,i.is_student_in_class])			
 		print(x)
 
+	def class_list(self):
+		"""Lists all classes and the number of
+		students in that class at the moment.
+		"""
+		# Create an instance of the PrettyTable
+		x = PrettyTable()
+
+		# return class id in Class table
+		get_class_id=self.session.query(Class).order_by(desc(Class.class_in_session))	
+
+		# return the tracked student id in TrackStudent table
+		#get_tracked_student_id=self.session.query(TrackStudent).order_by(desc(TrackStudent.class_id)).count()
+		
+		# Label the Table Columns
+		x.field_names = ["Class ID","Name","Class in Session","Start Time","End Time"]
+		
+		# Loop through the rows
+		for i in get_class_id:
+			x.add_row([i.id,i.name,i.class_in_session,i.class_start_time,i.class_end_time])			
+		print(x)
+
 if __name__ == '__main__':
 	Database().cmdloop()
