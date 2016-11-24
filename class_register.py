@@ -223,5 +223,23 @@ class Database(object):
 		x.align='l'			
 		cprint(x,'green',attrs=['bold'])
 
+	def track_student_list(self):
+		"""Lists all students who checked in and checked out of classes
+		"""
+		# Create an instance of the PrettyTable
+		x = PrettyTable()
+
+		# return the tracked student id in TrackStudent table
+		get_tracked_student_id=self.session.query(TrackStudent).order_by(desc(TrackStudent.class_id)).all()
+		
+		# Label the Table Columns
+		x.field_names = ["Tracking ID","Student Check In","Student Check Out","Reason","Student ID","Class ID"]
+		
+		# Loop through the rows
+		for i in get_tracked_student_id:
+			x.add_row([i.id,i.check_in_time,i.check_out_time,i.reason,i.student_id,i.class_id])			
+		x.align='l'			
+		cprint(x,'green',attrs=['bold'])
+
 if __name__ == '__main__':
 	Database().cmdloop()
