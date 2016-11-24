@@ -27,7 +27,7 @@ class AttendanceRegister(cmd.Cmd):
 				pass
 
 		click.clear()
-		click.secho("\t \t \t WELCOME TO YOUR C.A.R", fg='green')
+		click.secho("\t \t \t WELCOME TO C.A.R", fg='green')
 		click.secho('=' * 75, fg='white')
 		click.secho("")	
 		click.secho("Use 'help' command for assistance.", fg='yellow')
