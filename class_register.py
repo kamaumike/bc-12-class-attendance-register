@@ -1,9 +1,11 @@
 from termcolor import cprint
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,desc
 from sqlalchemy.orm import sessionmaker
 import click
 import calendar
 from datetime import datetime
+from prettytable import PrettyTable
+from tabulate import tabulate
 from models.models import Base,Student,Class,TrackStudent
 
 
@@ -15,7 +17,7 @@ DBSession = sessionmaker(bind=engine)
 
 class Database(object):
 	session = DBSession()
-
+	
 	def __init__(self):
 		pass
 
@@ -156,6 +158,23 @@ class Database(object):
 				click.secho("Warning! Student {} is not in any class.".format(student_id), fg='red')
 			else:
 				click.secho("Warning! [student_id] [class_id] [reason] cannot be empty.", fg='red')
-			
+
+	def student_list(self):
+		"""Lists all students
+		"""
+		# Create an instance of the PrettyTable
+		x = PrettyTable()
+
+		# Fetch all rows in Student table
+		get_students=self.session.query(Student).order_by(desc(Student.is_student_in_class))		
+		
+		# Label the Table Columns
+		x.field_names = ["Student ID","Student Name","Checked In"]
+		
+		# Loop through the rows
+		for i in get_students:
+			x.add_row([i.id,i.name,i.is_student_in_class])			
+		print(x)
+
 if __name__ == '__main__':
 	Database().cmdloop()

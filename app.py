@@ -64,6 +64,13 @@ class AttendanceRegister(cmd.Cmd):
 		db = Database()
 		db.check_out(data[0],data[1],data[2])
 		
+	def do_student_list(self, args):
+		"""[student_list]
+		Lists all students
+		"""	
+		db = Database()
+		db.student_list()
+
 	def do_exit(self,exit):
 		"""exit
 		Exits the application
