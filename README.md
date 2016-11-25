@@ -53,7 +53,7 @@ __Prerequisites__
 	- On line 7 add `sys.path.insert(0, './models')`
 	- On line 8 add `from models import Base`
 
-12. `Locate target_metadata = None` and replace it with `target_metadata = Base.metadata`
+12. Locate `target_metadata = None` and replace it with `target_metadata = Base.metadata`
 
 13. Run `alembic revision --autogenerate` command
 
