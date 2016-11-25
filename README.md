@@ -36,22 +36,21 @@ __Prerequisites__
 5. Clone this repository
 `https://github.com/kamaumike/bc-12-class-attendance-register/tree/develop`
 
-6. Install requirements
-`pip install -r requirements.txt`
+6. Install requirements `pip install -r requirements.txt`
 
-7.Move into the `bc-12-class-attendance-register directory`
+7. Move into the `bc-12-class-attendance-register directory`
 
-8.Open your terminal and type `alembic init migrations` command
+8. Open your terminal and type `alembic init migrations` command
 
 9. Locate the `alembic.ini` file and replace line 32 with `sqlalchemy.url = sqlite:///classregister.db`
 
-10.Locate the `migrations` directory and inside it locate the `env.py` file.
+10. Locate the `migrations` directory and inside it locate the `env.py` file.
 
-11.In the `env.py` file ,add these configurations after line 4
-	- On line 5 add `import sys`
-	- On line 6 add '# Add path to search for files to import`
-	- On line 7 add `sys.path.insert(0, './models')`
-	- On line 8 add `from models import Base`
+11. In the `env.py` file add these configurations after line 4
+	On line 5 add `import sys`
+	On line 6 add '# Add path to search for files to import`
+	On line 7 add `sys.path.insert(0, './models')`
+	On line 8 add `from models import Base`
 
 12. Locate `target_metadata = None` and replace it with `target_metadata = Base.metadata`
 
