@@ -34,7 +34,7 @@ __Prerequisites__
 4. Install [Git](https://git-scm.com/downloads) 
 
 5. Clone this repository
-`https://github.com/kamaumike/bc-12-class-attendance-register/tree/develop`
+`https://github.com/kamaumike/bc-12-class-attendance-register`
 
 6. Install requirements `pip install -r requirements.txt`
 
