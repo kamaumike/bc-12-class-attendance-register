@@ -142,7 +142,7 @@ class Database(object):
 					self.session.commit()
 					click.secho("Checked in student '{}' into class '{}'".format(student_id,class_id), fg='green')
 				else:
-					click.secho("Warning! You can only check into a single class.".format(class_id), fg='red')
+					click.secho("Warning! Class has not started.".format(class_id), fg='red')
 			else:
 				click.secho("Warning! [student_id] [class_id] [reason] cannot be empty.", fg='red')
 		except NoResultFound:
